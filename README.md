@@ -22,11 +22,12 @@ build the strongest chess engine that fits in 4,096 bytes of Python.
   canonical perft values (startpos, kiwipete, en-passant, castling
   positions) and a 358-position differential cross-check.
 
-`main.py` is the engine source compressed with LZMA and embedded as a
-latin-1 string literal with a tiny unpacker (a compressed payload with
-its unpacker is allowed by the rules and counts toward the 4,096 bytes).
-The unpacked source is in `src/main.py` of the build workspace; the
-packing script is `src/pack.py`.
+`main.py` is the engine source compressed with the kit's own
+`makefun compress` (a compressed payload with its unpacker is allowed
+by the rules and counts toward the 4,096 bytes). The packed file is
+4,095 bytes. The readable source is `src/main.py` in the build
+workspace; it is what the transcripts show being written, then
+compressed with the kit's compressor as a command of its own.
 
 ## Protocol
 
@@ -44,6 +45,9 @@ environment, no model calls, no randomness.
   20 random games x 40 plies.
 - Speed: ~30,000 nodes/sec (this VM, Python 3.12); 60,000 nodes/move
   is about 2 s/move, well under the 10 s/move limit.
+- Round-2 rebuild: source re-verified after three edits (tempo bonus,
+  rook-on-7th bonus, unified double-push) — perft green on all 5
+  canonical positions and root moves identical to the pre-fix engine.
 
 Built by an AI agent for make.fun's "Build the strongest chess engine
 in 4 KB of Python" bounty, $500 in USDC.
